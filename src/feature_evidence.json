@@ -1,0 +1,158 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-3-page-responsive-flow-page-1-page-2-page-3-with-client-side-navigation-page-1-loads-by-default-selecting-any-visible-yes-button-navigates-to-page-2-clicking-continue-on-page-2-navigates-to-page-3",
+      "featureTitle": "Implement a 3-page responsive flow (Page 1 → Page 2 → Page 3) with client-side navigation: Page 1 loads by default; selecting any visible “Yes” button navigates to Page 2; clicking “Continue” on Page 2 navigates to Page 3.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/CelebrationPage.tsx",
+        "frontend/src/pages/FutureFamilyPage.tsx",
+        "frontend/src/pages/ProposalPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-page-1-interactive-proposal-ui-a-full-page-background-using-a-tulips-and-roses-pattern-a-top-header-area-showing-a-full-body-hugging-couple-image-below-it-render-the-question-text-exactly-will-you-be-my-valentine-and-render-two-buttons-a-large-red-stationary-yes-button-and-a-no-button",
+      "featureTitle": "Build Page 1 (Interactive Proposal) UI: a full-page background using a tulips-and-roses pattern; a top header area showing a full-body hugging couple image; below it render the question text exactly: “Will you be my Valentine?”; and render two buttons: a large red stationary “Yes” button and a “No” button.",
+      "files": [
+        "frontend/src/pages/ProposalPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-page-1-no-button-behavior-on-hover-desktop-or-tap-mobile-the-no-button-must-jump-to-a-random-nearby-position-up-down-left-right-while-staying-within-the-visible-viewport-and-not-covering-the-yes-button-if-the-user-manages-to-tap-no-cycle-the-header-text-in-this-order-think-again-last-chance-finally-transform-the-no-button-into-a-second-yes-button-same-style-behavior-as-the-original-yes",
+      "featureTitle": "Implement Page 1 “No” button behavior: on hover (desktop) or tap (mobile), the “No” button must jump to a random nearby position (up/down/left/right) while staying within the visible viewport and not covering the “Yes” button. If the user manages to tap “No”, cycle the header text in this order: “Think again” → “Last chance” → finally transform the “No” button into a second “Yes” button (same style/behavior as the original “Yes”).",
+      "files": [
+        "frontend/src/pages/ProposalPage.tsx",
+        "frontend/src/utils/positioning.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-page-2-celebration-with-immediate-background-audio-playback-using-the-user-uploaded-song-file-and-implement-a-sequential-center-screen-popup-animation-cycling-through-the-30-user-uploaded-images-one-by-one-at-a-normal-readable-speed",
+      "featureTitle": "Build Page 2 (Celebration) with immediate background audio playback using the user-uploaded song file, and implement a sequential center-screen popup animation cycling through the 30 user-uploaded images one-by-one at a normal, readable speed.",
+      "files": [
+        "frontend/src/content/uploadedMedia.ts",
+        "frontend/src/hooks/useAutoplayAudio.ts",
+        "frontend/src/hooks/useSlideshowSequence.ts",
+        "frontend/src/pages/CelebrationPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-after-the-page-2-popup-sequence-finishes-transition-the-same-30-uploaded-images-into-a-top-to-bottom-grid-layout-that-fills-the-background-behind-content-then-render-a-transparent-glassmorphism-message-overlay-on-top-of-the-images-with-the-provided-message-text-and-include-a-bottom-continue-button-within-the-overlay",
+      "featureTitle": "After the Page 2 popup sequence finishes, transition the same 30 uploaded images into a top-to-bottom grid layout that fills the background behind content. Then render a transparent glassmorphism message overlay on top of the images with the provided message text, and include a bottom “Continue” button within the overlay.",
+      "files": [
+        "frontend/src/components/GlassOverlay.tsx",
+        "frontend/src/content/celebrationMessage.ts",
+        "frontend/src/pages/CelebrationPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-page-3-future-family-showing-a-single-hero-image-matching-the-provided-scene-description-and-render-the-footer-caption-text-exactly-below-it-our-sweet-little-palak-lokesh-vishwakrma-dubey-family-in-an-elegant-font-styling",
+      "featureTitle": "Build Page 3 (Future Family) showing a single hero image matching the provided scene description, and render the footer caption text exactly below it: “Our sweet little palak lokesh vishwakrma dubey family🧿❤️🤞🏻🤗🥹” in an elegant font styling.",
+      "files": [
+        "frontend/src/pages/FutureFamilyPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-romantic-visual-theme-across-all-pages-consistent-typography-spacing-buttons-and-overlays-using-a-warm-palette-e-g-rose-cream-gold-and-subtle-decorative-accents-appropriate-for-a-valentine-proposal-experience-keep-the-theme-consistent-and-responsive-across-breakpoints",
+      "featureTitle": "Apply a cohesive romantic visual theme across all pages (consistent typography, spacing, buttons, and overlays) using a warm palette (e.g., rose/cream/gold) and subtle decorative accents appropriate for a Valentine/proposal experience; keep the theme consistent and responsive across breakpoints.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-required-static-assets-to-the-frontend-static-asset-directory-frontend-public-assets-generated-and-ensure-they-are-referenced-directly-by-the-frontend-without-routing-images-audio-through-the-backend",
+      "featureTitle": "Add the required static assets to the frontend static asset directory (frontend/public/assets/generated) and ensure they are referenced directly by the frontend without routing images/audio through the backend.",
+      "files": [],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

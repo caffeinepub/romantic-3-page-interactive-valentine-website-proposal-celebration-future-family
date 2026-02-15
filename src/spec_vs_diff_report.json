@@ -1,0 +1,52 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T12:52:31.627Z",
+  "summary": "Implements a 3-page client-side flow (proposal → celebration → future family) with Page 1 evasive “No” behavior, Page 2 autoplay audio + sequential image popup then grid + glass overlay, and Page 3 hero image + caption. However, the required static generated assets are not evidenced in the diff summary, and an unrequested footer attribution/link was added on Page 3.",
+  "missing_requirements": [
+    {
+      "id": "REQ-8",
+      "requirement": "Add the required static assets to the frontend static asset directory (frontend/public/assets/generated) and ensure they are referenced directly by the frontend without routing images/audio through the backend.",
+      "reason": "The pages reference files under /assets/generated, but the diff summary does not show any files added under frontend/public/assets/generated (only code files are listed). Without those assets present, the requirement/AC cannot be verified from the diff summary.",
+      "evidence": [
+        "frontend/src/pages/ProposalPage.tsx",
+        "frontend/src/pages/CelebrationPage.tsx",
+        "frontend/src/pages/FutureFamilyPage.tsx",
+        "frontend/src/content/uploadedMedia.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added a footer with © year, a heart icon, and an external attribution link to caffeine.ai on Page 3.",
+      "reason": "The BuildRequest does not request any footer attribution or external link; only the hero image and exact caption text are required for Page 3.",
+      "evidence": [
+        "frontend/src/pages/FutureFamilyPage.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/GlassOverlay.tsx",
+    "frontend/src/content/celebrationMessage.ts",
+    "frontend/src/content/uploadedMedia.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAutoplayAudio.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useSlideshowSequence.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CelebrationPage.tsx",
+    "frontend/src/pages/FutureFamilyPage.tsx",
+    "frontend/src/pages/ProposalPage.tsx",
+    "frontend/src/utils/positioning.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

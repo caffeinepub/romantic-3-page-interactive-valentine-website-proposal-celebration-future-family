@@ -1,0 +1,205 @@
+{
+  "kind": "build_request",
+  "title": "Romantic 3-page interactive Valentine website (proposal → celebration → future family)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a 3-page responsive flow (Page 1 → Page 2 → Page 3) with client-side navigation: Page 1 loads by default; selecting any visible “Yes” button navigates to Page 2; clicking “Continue” on Page 2 navigates to Page 3.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a romantic, multi-page interactive website.",
+          "Page 2: The Celebration (Triggered by 'Yes')",
+          "Page 3: The Future Family (Triggered by 'Continue')"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Opening the app lands on Page 1.",
+        "Clicking/tapping a “Yes” button on Page 1 always navigates to Page 2.",
+        "Clicking/tapping “Continue” on Page 2 navigates to Page 3.",
+        "Layout works on mobile and desktop without overlapping or off-screen primary content."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Build Page 1 (Interactive Proposal) UI: a full-page background using a tulips-and-roses pattern; a top header area showing a full-body hugging couple image; below it render the question text exactly: “Will you be my Valentine?”; and render two buttons: a large red stationary “Yes” button and a “No” button.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Page 1: The Interactive Proposal",
+          "Background: A beautiful pattern of tulips and roses.",
+          "Header: At the top, an full image of Nick and Judy hugging each other thier full body should be visible from Zootopia movie.",
+          "Text: Below the image, the text: 'Will you be my Valentine?'",
+          "Yes Button: Large, red, and remains stationary."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page 1 shows a tulips/roses patterned background.",
+        "A header image is rendered at the top and is displayed in a way that preserves full-body visibility (no unintended cropping on common screen sizes).",
+        "The text “Will you be my Valentine?” is shown below the header image.",
+        "The “Yes” button is visually large, red, and does not move when hovering/tapping elsewhere.",
+        "The “No” button is visible and clickable/tappable."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement Page 1 “No” button behavior: on hover (desktop) or tap (mobile), the “No” button must jump to a random nearby position (up/down/left/right) while staying within the visible viewport and not covering the “Yes” button. If the user manages to tap “No”, cycle the header text in this order: “Think again” → “Last chance” → finally transform the “No” button into a second “Yes” button (same style/behavior as the original “Yes”).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "No Button: Every time it is tapped or hovered, it must jump to a random position (up, down, left, right).",
+          "The 'No' Logic: When the user eventually manages to tap 'No', the header text changes in this order: 'Think again' → 'Last chance' → and finally, the 'No' button transforms into a second 'Yes' button."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hovering over the “No” button on desktop moves it to a new random position.",
+        "Tapping the “No” button on touch devices moves it to a new random position (unless the tap is counted as a successful “No” click per the logic below).",
+        "The “No” button never moves outside the viewport bounds.",
+        "The “No” button does not overlap/cover the “Yes” button after it moves.",
+        "On the first successful click/tap of “No”, the displayed header text becomes “Think again”.",
+        "On the second successful click/tap of “No”, the displayed header text becomes “Last chance”.",
+        "On the third successful click/tap of “No”, the “No” button is replaced by a second “Yes” button; both “Yes” buttons navigate to Page 2."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build Page 2 (Celebration) with immediate background audio playback using the user-uploaded song file, and implement a sequential center-screen popup animation cycling through the 30 user-uploaded images one-by-one at a normal, readable speed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Audio: Start playing the song at background I uploaded immediately",
+          "Image Popup Animation: A series of images which I uploaded should pop up one by one in the center of the screen at a normal speed",
+          "The user has uploaded 30 image(s): IMG-20260104-WA0059.jpg, Photo1.jpg, IMG-20251226-WA0078.jpg, IMG-20260104-WA0050.jpg, IMG-20251226-WA0553.jpg, IMG-20260104-WA0028.jpg, IMG-20251220-WA0112.jpg, Photo6.jpg, IMG-20260104-WA0070.jpg, IMG-20260104-WA0039.jpg, IMG-20260104-WA0047.jpg, IMG-20260104-WA0030.jpg, IMG-20260104-WA0061.jpg, IMG-20260104-WA0060.jpg, IMG-20260104-WA0067.jpg, IMG-20251220-WA0023(1).jpg, IMG-20251219-WA0015.jpg, IMG-20251226-WA0132.jpg, IMG_20260101_000814.jpg, IMG-20251219-WA0014.jpg, IMG-20251226-WA0630.jpg, IMG-20251226-WA0600.jpg, Photo4.jpg, IMG-20251226-WA0255.jpg, Photo5.jpg, Photo2.jpg, IMG-20251226-WA0212.jpg, Photo3.jpg, IMG_20251116_000826.jpg, IMG-20251114-WA0020.jpg."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigating to Page 2 starts audio playback automatically (subject to browser autoplay policies).",
+        "If the browser blocks autoplay, the UI provides a clear, single action to start playback (e.g., a “Tap to play” control).",
+        "The popup animation displays each of the 30 uploaded images centered on the screen, one after another, at a consistent pace.",
+        "The popup animation works on both mobile and desktop without layout breaking."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "After the Page 2 popup sequence finishes, transition the same 30 uploaded images into a top-to-bottom grid layout that fills the background behind content. Then render a transparent glassmorphism message overlay on top of the images with the provided message text, and include a bottom “Continue” button within the overlay.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Layout Transition: Once the popups are finished, the images should settle into a gird view background (top to bottom).",
+          "Message Overlay: Over the images, display the following text in a transparent, glass-morphism style (the images must be visible behind the text):",
+          "Action: At the bottom of this message, show a 'Continue' button."
+        ]
+      },
+      "acceptanceCriteria": [
+        "After the final popup, the view transitions to a grid of the 30 images.",
+        "The grid is arranged in a readable top-to-bottom flow and remains behind the overlay.",
+        "A glassmorphism overlay (semi-transparent with blur) is rendered above the grid, and the grid remains visibly perceptible behind it.",
+        "The overlay shows the user-provided message text verbatim (including punctuation and emoji).",
+        "A “Continue” button appears at the bottom of the overlay and navigates to Page 3."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Build Page 3 (Future Family) showing a single hero image matching the provided scene description, and render the footer caption text exactly below it: “Our sweet little palak lokesh vishwakrma dubey family🧿❤️🤞🏻🤗🥹” in an elegant font styling.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Page 3: The Future Family (Triggered by 'Continue')",
+          "Visual: \"A hyper-realistic, heartwarming scene of a young Indian husband and wife with their small son and small daughter, surrounded by many pets including a panda, dogs of different breeds, kittens, and rabbits in a Chinese house garden, cinematic lighting, 8k.\"",
+          "Footer Text: Below this image, display: 'Our sweet little palak lokesh vishwakrma dubey family🧿❤️🤞🏻🤗🥹' in an elegant font."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page 3 shows the generated hero image prominently and responsively.",
+        "The footer caption is displayed exactly as specified (including emoji) and remains readable on mobile and desktop.",
+        "The page does not overflow horizontally on small screens."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Apply a cohesive romantic visual theme across all pages (consistent typography, spacing, buttons, and overlays) using a warm palette (e.g., rose/cream/gold) and subtle decorative accents appropriate for a Valentine/proposal experience; keep the theme consistent and responsive across breakpoints.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a romantic, multi-page interactive website.",
+          "The design should be responsive"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages share a consistent romantic theme (colors, typography, button styling).",
+        "Theme remains legible and visually balanced on mobile and desktop.",
+        "No default/unstyled components remain in the primary UI flow."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add the required static assets to the frontend static asset directory (frontend/public/assets/generated) and ensure they are referenced directly by the frontend without routing images/audio through the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Background: A beautiful pattern of tulips and roses.",
+          "Visual: \"A hyper-realistic, heartwarming scene ... cinematic lighting, 8k.\""
+        ]
+      },
+      "acceptanceCriteria": [
+        "Required generated images exist under frontend/public/assets/generated with the specified filenames.",
+        "Pages 1 and 3 render using those static assets via direct frontend paths.",
+        "No backend endpoints are used for serving images."
+      ]
+    }
+  ],
+  "constraints": [
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Backend must remain a single Motoko actor; do not introduce additional backend services.",
+    "Use the 30 uploaded images exactly as provided (filenames must match)."
+  ],
+  "nonGoals": [
+    "Implementing user accounts, Internet Identity login, or any authentication flow.",
+    "Storing user interactions or analytics in the backend.",
+    "Integrating any third-party APIs or external databases.",
+    "Adding real-time features (websockets/chat)."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Seamless repeating tulips and roses pattern background (tulips-roses-pattern.dim_1920x1080.png)",
+      "Full-body hugging cartoon couple in a warm romantic style, centered composition, portrait-friendly crop (hugging-couple-header.dim_1200x1600.png)",
+      "Hyper-realistic cinematic family in a Chinese house garden with many pets, warm heartwarming tone, ultra-detailed (future-family-scene.dim_3840x2160.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

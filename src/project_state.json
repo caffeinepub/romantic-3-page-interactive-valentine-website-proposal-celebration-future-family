@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a responsive, romantic 3-page interactive Valentine website with playful button interactions, media playback, image animations, glassmorphism overlay text, and a final hyper-realistic family scene.",
+  "architectural_notes": [
+    "Implement as a responsive multi-page flow with state-driven transitions (Yes -> celebration; Continue -> future family).",
+    "Page 1 requires event-driven UI behavior: random repositioning on hover/tap for 'No' and progressive 'No' tap state leading to transform into 'Yes'.",
+    "Page 2 requires timed sequencing: autoplay background audio + ordered image popup animation, then layout transition into grid with overlay text (glassmorphism)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Seamless repeating tulips and roses pattern background (tulips-roses-pattern.dim_1920x1080.png)\n- Full-body hugging cartoon couple in a warm romantic style, centered composition, portrait-friendly crop (hugging-couple-header.dim_1200x1600.png)\n- Hyper-realistic cinematic family in a Chinese house garden with many pets, warm heartwarming tone, ultra-detailed (future-family-scene.dim_3840x2160.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-3-page-responsive-flow-page-1-page-2-page-3-with-client-side-navigation-page-1-loads-by-default-selecting-any-visible-yes-button-navigates-to-page-2-clicking-continue-on-page-2-navigates-to-page-3",
+      "title": "Implement a 3-page responsive flow (Page 1 → Page 2 → Page 3) with client-side navigation: Page 1 loads by default; selecting any visible “Yes” button navigates to Page 2; clicking “Continue” on Page 2 navigates to Page 3.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-page-1-interactive-proposal-ui-a-full-page-background-using-a-tulips-and-roses-pattern-a-top-header-area-showing-a-full-body-hugging-couple-image-below-it-render-the-question-text-exactly-will-you-be-my-valentine-and-render-two-buttons-a-large-red-stationary-yes-button-and-a-no-button",
+      "title": "Build Page 1 (Interactive Proposal) UI: a full-page background using a tulips-and-roses pattern; a top header area showing a full-body hugging couple image; below it render the question text exactly: “Will you be my Valentine?”; and render two buttons: a large red stationary “Yes” button and a “No” button.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-page-1-no-button-behavior-on-hover-desktop-or-tap-mobile-the-no-button-must-jump-to-a-random-nearby-position-up-down-left-right-while-staying-within-the-visible-viewport-and-not-covering-the-yes-button-if-the-user-manages-to-tap-no-cycle-the-header-text-in-this-order-think-again-last-chance-finally-transform-the-no-button-into-a-second-yes-button-same-style-behavior-as-the-original-yes",
+      "title": "Implement Page 1 “No” button behavior: on hover (desktop) or tap (mobile), the “No” button must jump to a random nearby position (up/down/left/right) while staying within the visible viewport and not covering the “Yes” button. If the user manages to tap “No”, cycle the header text in this order: “Think again” → “Last chance” → finally transform the “No” button into a second “Yes” button (same style/behavior as the original “Yes”).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-page-2-celebration-with-immediate-background-audio-playback-using-the-user-uploaded-song-file-and-implement-a-sequential-center-screen-popup-animation-cycling-through-the-30-user-uploaded-images-one-by-one-at-a-normal-readable-speed",
+      "title": "Build Page 2 (Celebration) with immediate background audio playback using the user-uploaded song file, and implement a sequential center-screen popup animation cycling through the 30 user-uploaded images one-by-one at a normal, readable speed.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-after-the-page-2-popup-sequence-finishes-transition-the-same-30-uploaded-images-into-a-top-to-bottom-grid-layout-that-fills-the-background-behind-content-then-render-a-transparent-glassmorphism-message-overlay-on-top-of-the-images-with-the-provided-message-text-and-include-a-bottom-continue-button-within-the-overlay",
+      "title": "After the Page 2 popup sequence finishes, transition the same 30 uploaded images into a top-to-bottom grid layout that fills the background behind content. Then render a transparent glassmorphism message overlay on top of the images with the provided message text, and include a bottom “Continue” button within the overlay.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-page-3-future-family-showing-a-single-hero-image-matching-the-provided-scene-description-and-render-the-footer-caption-text-exactly-below-it-our-sweet-little-palak-lokesh-vishwakrma-dubey-family-in-an-elegant-font-styling",
+      "title": "Build Page 3 (Future Family) showing a single hero image matching the provided scene description, and render the footer caption text exactly below it: “Our sweet little palak lokesh vishwakrma dubey family🧿❤️🤞🏻🤗🥹” in an elegant font styling.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-romantic-visual-theme-across-all-pages-consistent-typography-spacing-buttons-and-overlays-using-a-warm-palette-e-g-rose-cream-gold-and-subtle-decorative-accents-appropriate-for-a-valentine-proposal-experience-keep-the-theme-consistent-and-responsive-across-breakpoints",
+      "title": "Apply a cohesive romantic visual theme across all pages (consistent typography, spacing, buttons, and overlays) using a warm palette (e.g., rose/cream/gold) and subtle decorative accents appropriate for a Valentine/proposal experience; keep the theme consistent and responsive across breakpoints.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-required-static-assets-to-the-frontend-static-asset-directory-frontend-public-assets-generated-and-ensure-they-are-referenced-directly-by-the-frontend-without-routing-images-audio-through-the-backend",
+      "title": "Add the required static assets to the frontend static asset directory (frontend/public/assets/generated) and ensure they are referenced directly by the frontend without routing images/audio through the backend.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Page 1: Interactive proposal page with tulips/roses background, header image, Valentine question text, and Yes/No button interactions (No jumps; on successful No taps change text 'Think again' -> 'Last chance' -> transform No into second Yes).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Page 2: Celebration page triggered by 'Yes' with immediate background audio playback, sequential center popup of uploaded images, then transition to a top-to-bottom grid background, plus glassmorphism message overlay and a 'Continue' button.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Page 3: Future Family page triggered by 'Continue' showing a hyper-realistic cinematic family scene image and an elegant footer caption.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Global: Multi-page navigation/flow (Page1 -> Page2 on Yes; Page2 -> Page3 on Continue) and responsive layout across devices.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Romantic 3-page interactive Valentine website (proposal → celebration → future family)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,23 @@
+{
+  "backend/main.mo": "Empty Motoko actor defining no backend logic.",
+  "feature_evidence.json": "Feature evidence report mapping implemented features to source files and components.",
+  "frontend-file-summaries.txt": "Prewritten summaries describing the purpose of each frontend file.",
+  "frontend/index.css": "Tailwind base and theme variables defining color tokens, dark mode values, and global styles.",
+  "frontend/index.html": "HTML entry point with root div and script loading the React app.",
+  "frontend/src/App.tsx": "Main component controlling navigation between proposal, celebration, and future-family pages.",
+  "frontend/src/components/GlassOverlay.tsx": "Glassmorphism container component applying blur and translucent styling.",
+  "frontend/src/content/celebrationMessage.ts": "Exports fixed heartfelt celebration message text for use on Page 2.",
+  "frontend/src/content/uploadedMedia.ts": "Exports ordered list of 30 image paths and the audio file path.",
+  "frontend/src/hooks/useActor.ts": "Creates and manages authenticated or anonymous backend actor via React Query.",
+  "frontend/src/hooks/useAutoplayAudio.ts": "Hook that attempts to autoplay looping audio and reports if autoplay is blocked.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Manages Internet Identity login, stored identity, and context provider.",
+  "frontend/src/hooks/useSlideshowSequence.ts": "Hook controlling timed sequential image index progression with completion flag.",
+  "frontend/src/index.css": "Tailwind theme, fonts, animations, and glass-overlay utilities for the frontend.",
+  "frontend/src/main.tsx": "Bootstraps React app with QueryClient and InternetIdentityProvider.",
+  "frontend/src/pages/CelebrationPage.tsx": "Shows a slideshow of uploaded images with autoplay audio, then transitions to an image grid with a glass-overlay message and a Continue button.",
+  "frontend/src/pages/FutureFamilyPage.tsx": "Displays a future-family image with a caption and a footer linking to caffeine.ai.",
+  "frontend/src/pages/ProposalPage.tsx": "Renders a Valentine proposal UI where the No button moves randomly to avoid overlap and eventually converts to Yes, triggering navigation on confirmation.",
+  "frontend/src/utils/positioning.ts": "Provides utilities to generate random on-screen positions and detect overlap between elements with padding.",
+  "frontend/tailwind.config.js": "Configures Tailwind theme extensions, plugins, colors, animations, and content scanning for the project.",
+  "project_state.json": "Defines the project’s requirements, existing features, image needs, and architectural notes for a 3‑page Valentine website."
+}
