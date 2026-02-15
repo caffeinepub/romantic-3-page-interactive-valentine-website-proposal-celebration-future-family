@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import GlassOverlay from '@/components/GlassOverlay';
-import { uploadedImages } from '@/content/uploadedMedia';
+import { uploadedImages, audioFile } from '@/content/uploadedMedia';
 import { celebrationMessage } from '@/content/celebrationMessage';
 import { useAutoplayAudio } from '@/hooks/useAutoplayAudio';
 import { useSlideshowSequence } from '@/hooks/useSlideshowSequence';
-import { Volume2 } from 'lucide-react';
+import { Volume2, AlertCircle } from 'lucide-react';
 
 interface CelebrationPageProps {
   onContinue: () => void;
 }
 
 export default function CelebrationPage({ onContinue }: CelebrationPageProps) {
-  const { isBlocked, play } = useAutoplayAudio('/assets/generated/AUD-20251006-WA0007.mp3');
+  const { isBlocked, loadError, play, retry } = useAutoplayAudio(audioFile);
   const { currentIndex, isComplete } = useSlideshowSequence(uploadedImages.length, 1500);
   const [showGrid, setShowGrid] = useState(false);
 
@@ -24,17 +24,40 @@ export default function CelebrationPage({ onContinue }: CelebrationPageProps) {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-rose-100 via-pink-50 to-rose-100">
-      {/* Audio Blocked Overlay */}
-      {isBlocked && (
+      {/* Audio Error Overlay */}
+      {loadError && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-3xl p-8 shadow-2xl text-center max-w-md">
-            <Volume2 className="mx-auto mb-4 text-rose-600" size={64} />
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Play Music</h2>
-            <p className="text-gray-600 mb-6">Tap to start the celebration with music!</p>
+            <AlertCircle className="mx-auto mb-4 text-red-600" size={64} />
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Audio Error</h2>
+            <p className="text-gray-600 mb-6">{loadError}</p>
+            <Button
+              onClick={retry}
+              size="lg"
+              className="bg-rose-600 hover:bg-rose-700 text-white text-xl px-12 py-6 rounded-full"
+            >
+              Retry
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Audio Blocked Overlay - Clearer prompt */}
+      {isBlocked && !loadError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 shadow-2xl text-center max-w-md">
+            <Volume2 className="mx-auto mb-4 text-rose-600 animate-pulse" size={64} />
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Let's Add Some Music! 🎵</h2>
+            <p className="text-gray-600 mb-2 text-lg">
+              Your browser needs permission to play audio.
+            </p>
+            <p className="text-gray-500 mb-6">
+              Tap the button below to start the celebration with beautiful music!
+            </p>
             <Button
               onClick={play}
               size="lg"
-              className="bg-rose-600 hover:bg-rose-700 text-white text-xl px-12 py-6 rounded-full"
+              className="bg-rose-600 hover:bg-rose-700 text-white text-xl px-12 py-6 rounded-full shadow-lg transform hover:scale-105 transition-all"
             >
               Play Music
             </Button>

@@ -1,363 +1,37 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Romantic 3-page interactive Valentine flow (proposal → celebration → future family)",
+  "title": "Clearer Celebration autoplay-blocked prompt + ensure generated audio asset is used",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Create a 3-page responsive client-side flow with default Page 1, Yes→Page 2, and Continue→Page 3 navigation.",
+      "id": "REQ-14",
+      "summary": "Make the Celebration page’s autoplay-blocked overlay more explicit and reassuring, keep it visible until playback starts or an error occurs, and ensure the generated MP3 is the audio source.",
       "acceptanceCriteria": [
-        "Opening the app lands on Page 1.",
-        "Clicking/tapping a “Yes” button on Page 1 always navigates to Page 2.",
-        "Clicking/tapping “Continue” on Page 2 navigates to Page 3.",
-        "Layout works on mobile and desktop without overlapping or off-screen primary content."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "create",
-          "description": "Implement lightweight in-app routing/state for Page 1 → Page 2 → Page 3 flow; ensure initial route is Page 1 and wire navigation handlers (Yes/Continue) to switch pages."
-        },
-        {
-          "path": "frontend/src/pages/ProposalPage.tsx",
-          "operation": "create",
-          "description": "Create Page 1 view component exposing onYes callback so App can navigate to Page 2."
-        },
-        {
-          "path": "frontend/src/pages/CelebrationPage.tsx",
-          "operation": "create",
-          "description": "Create Page 2 view component exposing onContinue callback so App can navigate to Page 3."
-        },
-        {
-          "path": "frontend/src/pages/FutureFamilyPage.tsx",
-          "operation": "create",
-          "description": "Create Page 3 view component used by App routing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Build Page 1 proposal UI with tulips/roses pattern background, top header couple image, exact question text, and Yes/No buttons.",
-      "acceptanceCriteria": [
-        "Page 1 shows a tulips/roses patterned background.",
-        "A header image is rendered at the top and is displayed in a way that preserves full-body visibility (no unintended cropping on common screen sizes).",
-        "The text “Will you be my Valentine?” is shown below the header image.",
-        "The “Yes” button is visually large, red, and does not move when hovering/tapping elsewhere.",
-        "The “No” button is visible and clickable/tappable."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/ProposalPage.tsx",
-          "operation": "modify",
-          "description": "Implement the Page 1 layout: full-page background using frontend/public/assets/generated/tulips-roses-pattern.dim_1920x1080.png; top header image using frontend/public/assets/generated/hugging-couple-header.dim_1200x1600.png displayed with sizing that preserves full-body visibility; render the exact text and the Yes/No buttons. Use the shadcn-ui component library (e.g., Button) to keep consistent button styling; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Implement Page 1 “No” button evasive movement and click/tap progression text cycle leading to transformation into a second Yes button.",
-      "acceptanceCriteria": [
-        "Hovering over the “No” button on desktop moves it to a new random position.",
-        "Tapping the “No” button on touch devices moves it to a new random position (unless the tap is counted as a successful “No” click per the logic below).",
-        "The “No” button never moves outside the viewport bounds.",
-        "The “No” button does not overlap/cover the “Yes” button after it moves.",
-        "On the first successful click/tap of “No”, the displayed header text becomes “Think again”.",
-        "On the second successful click/tap of “No”, the displayed header text becomes “Last chance”.",
-        "On the third successful click/tap of “No”, the “No” button is replaced by a second “Yes” button; both “Yes” buttons navigate to Page 2."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/ProposalPage.tsx",
-          "operation": "modify",
-          "description": "Add state and event handling for the “No” button: random nearby jump on hover (desktop) and touch interactions (mobile), constrained within viewport and avoiding overlap with the stationary Yes button; track successful No clicks/taps to cycle header text (“Think again” → “Last chance”) then transform No into a second Yes with identical style/behavior. Use shadcn-ui Button (if used on Page 1) for both Yes buttons to keep styling consistent; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/utils/positioning.ts",
-          "operation": "create",
-          "description": "Add utility helpers to compute safe random positions within the viewport and to detect/avoid overlap between the moving No button and the stationary Yes button (bounding-box based)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Build Page 2 to autoplay background audio from the uploaded song and run a sequential center popup slideshow for the 30 uploaded images.",
-      "acceptanceCriteria": [
-        "Navigating to Page 2 starts audio playback automatically (subject to browser autoplay policies).",
-        "If the browser blocks autoplay, the UI provides a clear, single action to start playback (e.g., a “Tap to play” control).",
-        "The popup animation displays each of the 30 uploaded images centered on the screen, one after another, at a consistent pace.",
-        "The popup animation works on both mobile and desktop without layout breaking."
+        "When the browser blocks autoplay, the Celebration page shows a clear on-screen prompt instructing the user to tap a button to start the music.",
+        "The prompt remains visible until the user successfully starts playback or an audio load/play error is detected.",
+        "All user-facing strings added or changed for this prompt are in English.",
+        "The existing Play Music action still triggers audio playback via the existing handler (no regressions to the current flow)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/CelebrationPage.tsx",
           "operation": "modify",
-          "description": "Implement Page 2 audio playback using frontend/public/assets/generated/AUD-20251006-WA0007.mp3 with autoplay attempt and a single, clear fallback control when autoplay is blocked; implement a timed sequence that displays each of the 30 user-uploaded images centered one-by-one at a consistent, readable speed. Use shadcn-ui components (e.g., Button) for the fallback play control to keep styling consistent; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/content/uploadedMedia.ts",
-          "operation": "create",
-          "description": "Define the ordered list of the 30 uploaded image filenames (exact names) and the audio filename as constants used by Page 2, ensuring filenames match exactly as provided."
+          "description": "Update the autoplay-blocked overlay copy to be more explicit/reassuring (English-only) about why music didn’t start and that tapping the button will start it; ensure the overlay’s visibility logic matches the requirement (stays up until playback succeeds or an error state is present). Continue using the existing shadcn-ui Button for the action and the existing play handler; verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/hooks/useAutoplayAudio.ts",
-          "operation": "create",
-          "description": "Add a small React hook that attempts audio autoplay on mount and exposes state to show a user-gesture play button when blocked by browser policies."
-        },
-        {
-          "path": "frontend/src/hooks/useSlideshowSequence.ts",
-          "operation": "create",
-          "description": "Add a React hook to drive the popup image sequence timing (index progression, completion state) in a deterministic, consistent pace across devices."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "After the Page 2 popup sequence, transition into a background image grid and render a glassmorphism message overlay with Continue button to Page 3.",
-      "acceptanceCriteria": [
-        "After the final popup, the view transitions to a grid of the 30 images.",
-        "The grid is arranged in a readable top-to-bottom flow and remains behind the overlay.",
-        "A glassmorphism overlay (semi-transparent with blur) is rendered above the grid, and the grid remains visibly perceptible behind it.",
-        "The overlay shows the user-provided message text verbatim (including punctuation and emoji).",
-        "A “Continue” button appears at the bottom of the overlay and navigates to Page 3."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/CelebrationPage.tsx",
           "operation": "modify",
-          "description": "Add the post-slideshow transition: render the same 30 images in a top-to-bottom background grid behind content after the popup sequence completes; render a glassmorphism overlay above the grid containing the message text (sourced verbatim from a single constant) and a bottom Continue button that triggers onContinue navigation. Use shadcn-ui components (e.g., Card for the overlay container and Button for Continue) to support consistent styling; verify the component's usage instructions before implementing."
+          "description": "Refine autoplay/play error classification so true audio support/loading failures surface as an error state (so the blocked prompt does not mask an actual failure), while genuine autoplay permission blocks keep the blocked state until the user initiates playback; preserve the existing play() handler behavior for the Play Music action."
         },
         {
-          "path": "frontend/src/content/celebrationMessage.ts",
-          "operation": "create",
-          "description": "Add a single exported constant for the Page 2 overlay message text; populate this constant with the exact user-provided message text verbatim (including punctuation and emoji) during implementation."
-        },
-        {
-          "path": "frontend/src/components/GlassOverlay.tsx",
-          "operation": "create",
-          "description": "Create a reusable glassmorphism overlay component (semi-transparent background + blur) used on Page 2 to ensure consistent look and responsive padding. Use shadcn-ui Card (if available) as the base container; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Build Page 3 with a single responsive hero image and the exact footer caption in an elegant font.",
-      "acceptanceCriteria": [
-        "Page 3 shows the generated hero image prominently and responsively.",
-        "The footer caption is displayed exactly as specified (including emoji) and remains readable on mobile and desktop.",
-        "The page does not overflow horizontally on small screens."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/FutureFamilyPage.tsx",
+          "path": "frontend/src/content/uploadedMedia.ts",
           "operation": "modify",
-          "description": "Render the Page 3 hero image from frontend/public/assets/generated/future-family-scene.dim_3840x2160.png with responsive sizing and no horizontal overflow; render the exact caption text “Our sweet little palak lokesh vishwakrma dubey family🧿❤️🤞🏻🤗🥹” directly below in elegant typography."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Apply a cohesive romantic theme (warm palette, consistent typography/spacing/buttons/overlays) across all pages with responsive behavior.",
-      "acceptanceCriteria": [
-        "All pages share a consistent romantic theme (colors, typography, button styling).",
-        "Theme remains legible and visually balanced on mobile and desktop.",
-        "No default/unstyled components remain in the primary UI flow."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Define global romantic theme styling using Tailwind base layers/CSS variables: warm palette (rose/cream/gold), consistent typography defaults, and shared utility classes for buttons/overlays; ensure responsive text sizing and prevent horizontal overflow."
+          "description": "Verify the audioFile constant references the intended generated MP3 under frontend/public/assets/generated and adjust only if it does not match the actual asset location/name; keep static media referenced directly from the public generated assets folder."
         },
         {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Extend Tailwind theme tokens (colors, shadows, border radius, animations if needed) to support a consistent romantic palette and subtle decorative accents used across Pages 1–3."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Wrap pages in a consistent layout container (spacing, max widths where appropriate) and ensure shared button/overlay styles are applied consistently across the three-page flow."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Add required generated static assets under frontend/public/assets/generated and reference them directly from the frontend.",
-      "acceptanceCriteria": [
-        "Required generated images exist under frontend/public/assets/generated with the specified filenames.",
-        "Pages 1 and 3 render using those static assets via direct frontend paths.",
-        "No backend endpoints are used for serving images."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/tulips-roses-pattern.dim_1920x1080.png",
+          "path": "frontend/public/assets/generated/AUD-20240215-WA0010.mp3",
           "operation": "create",
-          "description": "Add the generated tulips/roses seamless pattern image asset at the exact path/filename for direct frontend use."
-        },
-        {
-          "path": "frontend/public/assets/generated/hugging-couple-header.dim_1200x1600.png",
-          "operation": "create",
-          "description": "Add the generated full-body hugging couple header image asset at the exact path/filename for direct frontend use."
-        },
-        {
-          "path": "frontend/public/assets/generated/future-family-scene.dim_3840x2160.png",
-          "operation": "create",
-          "description": "Add the generated future family hero image asset at the exact path/filename for direct frontend use."
-        },
-        {
-          "path": "frontend/public/assets/generated/AUD-20251006-WA0007.mp3",
-          "operation": "create",
-          "description": "Add the user-uploaded audio file to the static assets directory so Page 2 can reference it directly without backend routing."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0059.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (1/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo1.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (2/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0078.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (3/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0050.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (4/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0553.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (5/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0028.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (6/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251220-WA0112.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (7/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo6.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (8/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0070.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (9/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0039.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (10/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0047.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (11/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0030.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (12/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0061.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (13/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0060.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (14/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20260104-WA0067.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (15/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251220-WA0023(1).jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (16/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251219-WA0015.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (17/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0132.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (18/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG_20260101_000814.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (19/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251219-WA0014.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (20/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0630.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (21/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0600.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (22/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo4.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (23/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0255.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (24/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo5.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (25/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo2.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (26/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251226-WA0212.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (27/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/Photo3.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (28/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG_20251116_000826.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (29/30) with exact filename for the Page 2 sequence and grid."
-        },
-        {
-          "path": "frontend/public/assets/generated/IMG-20251114-WA0020.jpg",
-          "operation": "create",
-          "description": "Add uploaded image asset (30/30) with exact filename for the Page 2 sequence and grid."
+          "description": "Add the required MP3 audio asset at this exact path so the Celebration page can load it directly from static public assets (no backend proxying)."
         }
       ]
     }

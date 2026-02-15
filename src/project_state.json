@@ -1,15 +1,20 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 9,
   "summary": "Build a responsive, romantic 3-page interactive Valentine website with playful button interactions, media playback, image animations, glassmorphism overlay text, and a final hyper-realistic family scene.",
   "architectural_notes": [
     "Implement as a responsive multi-page flow with state-driven transitions (Yes -> celebration; Continue -> future family).",
     "Page 1 requires event-driven UI behavior: random repositioning on hover/tap for 'No' and progressive 'No' tap state leading to transform into 'Yes'.",
-    "Page 2 requires timed sequencing: autoplay background audio + ordered image popup animation, then layout transition into grid with overlay text (glassmorphism)."
+    "Page 2 requires timed sequencing: autoplay background audio + ordered image popup animation, then layout transition into grid with overlay text (glassmorphism).",
+    "Audio playback must handle browser autoplay restrictions (require explicit user gesture) and must validate the audio asset path/filename exists; show a clear fallback UI prompt when autoplay is blocked or file fails to load.",
+    "Page 2 audio asset filename confirmed by user: AUD-20240215-WA0010.mp3; update centralized audioFile constant and any hard-coded references to match this exact file in frontend/public/assets/generated.",
+    "Add an explicit on-screen pre-play prompt/action on Page 2 (e.g., “Tap to start music”) to satisfy autoplay restrictions and improve clarity before attempting audio playback.",
+    "Ensure the exact audio file AUD-20240215-WA0010.mp3 is present in frontend/public/assets/generated and referenced consistently via the centralized audioFile constant."
   ],
-  "known_issues": [],
-  "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Seamless repeating tulips and roses pattern background (tulips-roses-pattern.dim_1920x1080.png)\n- Full-body hugging cartoon couple in a warm romantic style, centered composition, portrait-friendly crop (hugging-couple-header.dim_1200x1600.png)\n- Hyper-realistic cinematic family in a Chinese house garden with many pets, warm heartwarming tone, ultra-detailed (future-family-scene.dim_3840x2160.png)",
+  "known_issues": [
+    "Page 2 music not playing: likely due to incorrect/missing audio asset filename/path (e.g., /assets/generated/...mp3 mismatch) and/or autoplay restrictions; needs verification and robust fallback handling."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-implement-a-3-page-responsive-flow-page-1-page-2-page-3-with-client-side-navigation-page-1-loads-by-default-selecting-any-visible-yes-button-navigates-to-page-2-clicking-continue-on-page-2-navigates-to-page-3",
@@ -74,6 +79,54 @@
         "REQ-8"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-the-user-s-re-uploaded-audio-file-into-the-frontend-static-assets-directory-frontend-public-assets-generated-and-update-the-app-to-reference-the-exact-filename-path-of-that-newly-uploaded-audio-file",
+      "title": "Add the user’s re-uploaded audio file into the frontend static assets directory (frontend/public/assets/generated) and update the app to reference the exact filename/path of that newly uploaded audio file.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-hard-coded-audio-path-in-celebrationpage-and-use-the-centralized-audiofile-constant-from-frontend-src-content-uploadedmedia-ts-so-the-audio-filename-is-defined-in-exactly-one-place",
+      "title": "Remove the hard-coded audio path in CelebrationPage and use the centralized audioFile constant from frontend/src/content/uploadedMedia.ts so the audio filename is defined in exactly one place.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-page-2-audio-playback-robust-by-detecting-and-surfacing-audio-load-play-failures-e-g-missing-file-404-decode-errors-or-autoplay-restrictions-and-providing-a-clear-user-facing-recovery-action-to-retry-playback",
+      "title": "Make Page 2 audio playback robust by detecting and surfacing audio load/play failures (e.g., missing file/404, decode errors, or autoplay restrictions) and providing a clear user-facing recovery action to retry playback.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-provided-audio-file-aud-20240215-wa0010-mp3-to-the-frontend-static-assets-directory-at-exactly-frontend-public-assets-generated-aud-20240215-wa0010-mp3",
+      "title": "Add the user-provided audio file \"AUD-20240215-WA0010.mp3\" to the frontend static assets directory at exactly: frontend/public/assets/generated/AUD-20240215-WA0010.mp3.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-centralized-audio-path-constant-in-frontend-src-content-uploadedmedia-ts-so-it-references-exactly-assets-generated-aud-20240215-wa0010-mp3-and-no-other-filename",
+      "title": "Update the centralized audio path constant in frontend/src/content/uploadedMedia.ts so it references exactly \"/assets/generated/AUD-20240215-WA0010.mp3\" (and no other filename).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-the-celebration-page-s-user-prompt-shown-when-background-music-autoplay-is-blocked-so-it-is-more-explicit-and-reassuring-about-what-the-user-should-do-to-start-the-music-keep-all-user-facing-text-in-english",
+      "title": "Improve the Celebration page’s user prompt shown when background music autoplay is blocked so it is more explicit and reassuring about what the user should do to start the music (keep all user-facing text in English).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -98,6 +151,12 @@
     {
       "id": "AR-4",
       "summary": "Global: Multi-page navigation/flow (Page1 -> Page2 on Yes; Page2 -> Page3 on Continue) and responsive layout across devices.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Fix Page 2 background music playback: ensure the re-uploaded audio file is correctly included in frontend assets and referenced with the exact filename/path so it reliably plays after user interaction; optionally improve the on-screen prompt when autoplay is blocked.",
       "reqIds": [],
       "status": "pending"
     }

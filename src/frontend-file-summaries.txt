@@ -1,14 +1,15 @@
 {
   "frontend/src/App.tsx": "Main app component managing page state and navigation between the three pages (proposal, celebration, future-family).",
   "frontend/src/pages/ProposalPage.tsx": "Interactive proposal page with tulips/roses background, header image, Valentine question, and Yes/No buttons with evasive \"No\" button logic.",
-  "frontend/src/pages/CelebrationPage.tsx": "Celebration page with autoplay audio, sequential image popup animation, grid background transition, and glassmorphism message overlay.",
+  "frontend/src/pages/CelebrationPage.tsx": "Celebration page with autoplay audio, sequential image popup animation, grid background transition, glassmorphism message overlay, and improved autoplay-blocked prompt with clearer, more reassuring copy and enhanced visual feedback.",
   "frontend/src/pages/FutureFamilyPage.tsx": "Final page displaying the future family hero image with elegant caption and footer attribution.",
   "frontend/src/components/GlassOverlay.tsx": "Reusable glassmorphism overlay component with semi-transparent background and blur effect.",
   "frontend/src/utils/positioning.ts": "Utility functions for calculating random safe positions and detecting overlap between UI elements.",
-  "frontend/src/content/uploadedMedia.ts": "Constants defining the ordered list of 30 uploaded image filenames and audio file path.",
+  "frontend/src/content/uploadedMedia.ts": "Constants defining the ordered list of 30 uploaded image filenames and the audio file path now pointing to AUD-20240215-WA0010.mp3.",
   "frontend/src/content/celebrationMessage.ts": "Constant containing the exact celebration message text to display on page 2.",
-  "frontend/src/hooks/useAutoplayAudio.ts": "Custom hook managing audio autoplay with fallback for blocked autoplay scenarios.",
+  "frontend/src/hooks/useAutoplayAudio.ts": "Custom hook managing audio autoplay with refined error detection that distinguishes between autoplay policy blocks (requiring user interaction) and actual audio loading/playback failures, maintaining blocked state until successful playback.",
   "frontend/src/hooks/useSlideshowSequence.ts": "Custom hook driving the timed image popup sequence with completion state tracking.",
   "frontend/src/index.css": "Global styles with romantic OKLCH color system, glassmorphism utilities, and custom animations for floating hearts and scale-in effects.",
-  "frontend/tailwind.config.js": "Tailwind configuration with extended romantic color palette (rose/pink tones), custom shadows, serif fonts, and animation utilities."
+  "frontend/tailwind.config.js": "Tailwind configuration with extended romantic color palette (rose/pink tones), custom shadows, serif fonts, and animation utilities.",
+  "frontend/public/assets/generated/AUD-20240215-WA0010.mp3": "Audio file asset for the celebration page music."
 }
